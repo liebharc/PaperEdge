@@ -37,11 +37,11 @@ if __name__ == '__main__':
     Path(dst_dir).mkdir(parents=True, exist_ok=True)
 
     netG = GlobalWarper().to('cuda')
-    netG.load_state_dict(torch.load(args['Enet_ckpt'])['G'])
+    netG.load_state_dict(torch.load(args.Enet_ckpt)['G'])
     netG.eval()
 
     netL = LocalWarper().to('cuda')
-    netL.load_state_dict(torch.load(args['Tnet_ckpt'])['L'])
+    netL.load_state_dict(torch.load(args.Tnet_ckpt)['L'])
     netL.eval()
 
     warpUtil = WarperUtil(64).to('cuda')
