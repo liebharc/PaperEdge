@@ -13,6 +13,8 @@ from networks.paperedge import GlobalWarper, LocalWarper, WarperUtil
 cv2.setNumThreads(0)
 cv2.ocl.setUseOpenCL(False)
 
+script_dir = Path(__file__).parent.resolve()
+model_dir = script_dir / 'models'
 
 def load_img(img_path):
     im = cv2.imread(img_path).astype(np.float32) / 255.0
@@ -21,13 +23,12 @@ def load_img(img_path):
     im = torch.from_numpy(np.transpose(im, (2, 0, 1)))
     return im
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--Enet_ckpt', type=str,
-                        default='models/G_w_checkpoint_13820.pt')
+                        default=model_dir / 'G_w_checkpoint_13820.pt')
     parser.add_argument('--Tnet_ckpt', type=str,
-                        default='models/L_w_checkpoint_27640.pt')
+                        default=model_dir / 'L_w_checkpoint_27640.pt')
     parser.add_argument('--img_path', type=str, default='images/3.jpg')
     parser.add_argument('--out_dir', type=str, default='output')
     args = parser.parse_args()
